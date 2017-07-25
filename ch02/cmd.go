@@ -9,7 +9,8 @@ import (
 type Cmd struct {
 	helpFlag    bool
 	versionFlag bool
-	cpOption    string
+	cpOption    string // classpath位置
+	XjreOption  string // jre位置
 	class       string
 	args        []string
 }
@@ -24,6 +25,7 @@ func parseCmd() *Cmd {
 	flag.BoolVar(&cmd.versionFlag, "v", false, "print version and exit.")
 	flag.StringVar(&cmd.cpOption, "classpath", "", "classpath")
 	flag.StringVar(&cmd.cpOption, "cp", "", "classpath")
+	flag.StringVar(&cmd.XjreOption, "Xjre", "", "path to jre")
 	flag.Parse() //解析失败就会调用printUsage
 
 	args := flag.Args() //获取没有被解析的参数

@@ -1,3 +1,5 @@
+//对class数据进行读取
+
 package classfile
 
 import (
@@ -35,7 +37,7 @@ func (self *ClassReader) readUint64() uint64 {
 	return val
 }
 
-//读取uint16表   uint16表的大小由开头的uint16数据指出 
+//读取uint16表   uint16表的大小由开头的uint16数据指出
 func (self *ClassReader) readUint16s() []uint16 {
 	n := self.readUint16()
 	s := make([]uint16, n)
@@ -43,7 +45,7 @@ func (self *ClassReader) readUint16s() []uint16 {
 		s[i] = self.readUint16()
 	}
 	return s
-
+}
 
 //读取指定字节
 func (self *ClassReader) readBytes(length uint32) []byte {

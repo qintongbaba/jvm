@@ -6,7 +6,6 @@ import (
 
 type ClassFile struct {
 	//magic   uint32
-
 	minorVersion uint16       //次版本号
 	majorVersion uint16       //主版本号
 	constantPool ConstantPool //常量池
@@ -36,9 +35,9 @@ func Parse(classData []byte) (cf *ClassFile, err error) {
 	return cf
 }
 func (self *ClassFile) read(reader *ClassReader) {
-	self.readAndCheckMagic(reader)
-	self.readAndCheckVersion(reader)
-	self.constantPool = readConstantPool(reader)
+	self.readAndCheckMagic(reader)               //读取魔数
+	self.readAndCheckVersion(reader)             //检查其支持版本
+	self.constantPool = readConstantPool(reader) //读取常量池
 	self.accessFlags = reader.readUint16()
 	self.thisClass = reader.readUint16()
 	self.superClass = reader.readUint16()
@@ -50,6 +49,7 @@ func (self *ClassFile) read(reader *ClassReader) {
 func (self *ClassFile) readAndCheckMagic(reader *ClassReader) {
 	magic := reader.readUint32()
 
+	//检查是否为class的魔数
 	if magic != 0xCAFEBABE {
 		panic("java.lang.ClassFormatError: magic!")
 	}
@@ -66,27 +66,32 @@ func (self *ClassFile) readAndCheckVersion(reader *ClassReader) {
 			return
 		}
 	}
-
 	panic("java.lang.UnsupportedClassVersionError!")
 }
 func (self *ClassFile) MinorVersion() uint16 {
 	return self.minorVersion
 } //getter
+
 func (self *ClassFile) MajorVersion() uint16 {
 	return self.majorVersion
 } //getter
+
 func (self *ClassFile) ConstantPool() ConstantPool {
 	return self.constantPool
 } //getter
+
 func (self *ClassFile) AccessFlags() uint16 {
 	return self.accessFlags
 } //getter
+
 func (self *ClassFile) Fields() []*MemberInfo {
 	return self.fields
 } //getter
+
 func (self *ClassFile) Methods() []*MemberInfo {
 	return self.methods
 } //getter
+
 func (self *ClassFile) ClassName() string {
 	return self.constantPool.getClassName(self.thisClass)
 }

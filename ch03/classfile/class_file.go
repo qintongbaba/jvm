@@ -31,8 +31,8 @@ func Parse(classData []byte) (cf *ClassFile, err error) {
 
 	cr := &ClassReader{classData}
 	cf = &ClassFile{}
-	cf.read(reader)
-	return cf
+	cf.read(cr)
+	return cf, nil
 }
 func (self *ClassFile) read(reader *ClassReader) {
 	self.readAndCheckMagic(reader)               //读取魔数

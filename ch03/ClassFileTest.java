@@ -1,6 +1,7 @@
 package jvm.ch03;
+import java.io.Serializable;
 
-public class ClassFileTest{
+public class ClassFileTest implements Serializable{
 
     public static final boolean FLAG  = true;
     public static final byte BYTE = 123;

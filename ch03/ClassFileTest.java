@@ -15,4 +15,10 @@ public class ClassFileTest implements Serializable{
     public void main(String[] args) throws RuntimeException{
         System.out.println("Hello, World!");
     }
+
+    public static float circumference(float r){
+        float pi = 3.14f;
+        float area = 2*pi*r;
+        return area;
+    }
 }

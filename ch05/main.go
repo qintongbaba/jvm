@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"jvm/ch04/rtda"
+	"jvm/ch05/rtda"
 )
 
 func main() {
